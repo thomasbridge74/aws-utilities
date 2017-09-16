@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1505590072000",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVpcs",
+                "route53:ChangeResourceRecordSets",
+                "route53:CreateHostedZone",
+                "route53:DeleteHostedZone",
+                "route53:ListResourceRecordSets",
+                "route53:ListHostedZones"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}

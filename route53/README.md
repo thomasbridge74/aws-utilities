@@ -22,7 +22,7 @@ This is developed on a Mac.   I expect it will work on Linux with no changes, bu
 
 ## What's in this directory?
 
-There are four files.
+There are five files.
 
 ### route53.ini
 
@@ -42,9 +42,15 @@ This sets up the domain in AWS, including with the RR record defined in the ini 
 
 This deletes the zone.   First, it needs to delete any RRs defined within the zone, and then the zone itself.   (The script uses
 a function that only returns a maximum of 100 RRs - I'm assuming that a test zone won't have more than 100 RRs but if your zone does,
-this won't work.
+this won't work).
 
 ### route53-list-zone.py
 
 A very simple script that lists all the zones in your route53 account.
+
+### script-minimal-policy.json
+
+This sets the minimal policy required for the user for the scripts to work. The 
+[documentation](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/r53-api-permissions-ref.html#required-permissions-private-hosted-zones)
+implies that `ec2:DescribeRegions` is also required, but I didn't find it was in my environment.
 
