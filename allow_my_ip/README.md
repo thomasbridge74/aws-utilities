@@ -18,6 +18,11 @@ To use this script effectively you need to do the following:
 script will use the default region defined under the aws configure command.    If there is no default region, then the script
 will simply exit.
 
+## IAM Role permissions
+
+The minimal policy required for this script to be effective is `ec2:AuthorizeSecurityGroupIngress`.    A sample policy allowing this 
+is included in the file `script-minimal-policy.json`
+
 ## Note
 
 This is a useful utility that has worked well for me on my MacBook.   I am putting it out here as I hope it may be useful
