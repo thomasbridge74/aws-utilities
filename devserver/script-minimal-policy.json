@@ -8,6 +8,7 @@
                 "ec2:DescribeInstances",
                 "ec2:StartInstances",
                 "route53:ChangeResourceRecordSets",
+                "ec2:StopInstances",
                 "route53:ListHostedZonesByName",
                 "ec2:DescribeInstanceStatus"
             ],

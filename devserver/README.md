@@ -43,3 +43,7 @@ devserver.ini has just a main section.   The settings here are
 This script checks to see if the server is running, and if it isn't, starts it up.   Once the server is running, the public IP address of the
 server is obtained and then used to update the zone in route 53.
 
+### devserver-stop.py
+
+Just stops the dev server.    
+
