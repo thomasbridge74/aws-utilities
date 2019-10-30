@@ -4,20 +4,21 @@
 # Issued under the GPL.
 
 import boto3
-import ConfigParser
+import configparser
 import sys
 import time
+
 #from botocore.errorfactory import InvalidVPCId  
 
 debug = False
 
 try:
-	Config = ConfigParser.ConfigParser()
+	Config = configparser.ConfigParser()
 	Config.read("route53.ini")
 	vpcid = Config.get("setup", "vpcid")
 	domainname = Config.get("main", "domainname")
 except:
-	print "Cannot get setup settings"
+	print("Cannot get setup settings")
 	sys.exit()
 
 try:
@@ -26,11 +27,11 @@ except ConfigParser.NoOptionError:
 	region = boto3.session.Session().region_name
 
 if not region:
-	print "Cannot determine the region"
+	print("Cannot determine the region")
 	sys.exit()
 else:
 	if debug:
-		print "Region is: " + region
+		print("Region is: " + region)
 		
 client = boto3.client('route53')
 call_ref = str(int(time.time()))
@@ -38,8 +39,8 @@ call_ref = str(int(time.time()))
 try:
 	response = client.create_hosted_zone(Name = domainname, CallerReference=call_ref, VPC={'VPCRegion': region, 'VPCId': vpcid}, HostedZoneConfig = {'PrivateZone': True})
 except Exception as ex:
-	print "Couldn't create zone " + domainname + " in VPC " + vpcid + " (region is: " + region + ")"
-	print "Error: " + ex.response["Error"]["Message"]
+	print("Couldn't create zone " + domainname + " in VPC " + vpcid + " (region is: " + region + ")")
+	print("Error: " + ex.response["Error"]["Message"])
 	sys.exit()
 		
 rr_name = Config.get("rrset1", "name") + '.' + domainname

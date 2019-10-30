@@ -12,6 +12,6 @@ connection = boto3.client('route53')
 response = connection.list_hosted_zones()
 
 for hosted_zone in response.get("HostedZones"):
-	print hosted_zone.get("Name") + " has ID " + hosted_zone.get("Id")
+	print(hosted_zone.get("Name") + " has ID " + hosted_zone.get("Id"))
 
 		
