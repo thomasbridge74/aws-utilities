@@ -10,6 +10,7 @@ def createParser():
     parser.add_argument("-r", "--role", help="Rolename in configuration")
     parser.add_argument("-p", "--platform", help="Platform value in tag", default="Linux")
     parser.add_argument("-a", "--action", help="start|stop|status", default="status")
+    parser.add_argument("-t", "--tag", help="Tag Name (defaults to Platform)", default="Platform")
     return(parser)
 
 # if defined(role)
@@ -18,14 +19,18 @@ def main():
     platform = args.platform
     role = args.role
     action = args.action
+    tag = args.tag
     print("Action is " + action)
     if action not in ['start', 'stop', 'status']:
         print("Invalid action")
         sys.exit()
 
     try:
-        ec2 = boto3.Session(profile_name=role).client('ec2')
-        filter = [{'Name': 'tag:Platform', 'Values': [platform]}]
+        if role:
+            ec2 = boto3.Session(profile_name=role).client('ec2')
+        else:
+            ec2 = boto3.Session().client('ec2')
+        filter = [{'Name': 'tag:' + tag, 'Values': [platform]}]
         instances = ec2.describe_instances(Filters=filter)
     except Exception as e:
         print("Error: ", e)
